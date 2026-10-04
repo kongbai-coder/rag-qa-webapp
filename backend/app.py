@@ -48,9 +48,10 @@ llm = ChatOpenAI(
 
 CONV_PROMPT = ChatPromptTemplate.from_messages([
     ("system",
-     "你是严谨的知识库问答助手，答案必须来自参考资料，"
-     "资料不足时回答：抱歉，知识库中没有相关信息；"
-     "回答末尾用[1][2]标注引用。"),
+     "你是严谨的知识库问答助手，答案必须来自参考资料。"
+     "若参考资料不足以回答问题，必须且只能原样回复这一句话："
+     "抱歉，知识库中没有相关信息。此时不要解释资料包含什么、不要罗列无关内容、不要添加任何引用标注。"
+     "若资料足以回答，正常作答并在回答末尾用[1][2]标注引用。"),
     MessagesPlaceholder(variable_name="history"),
     ("human", "参考资料：\n{context}\n\n问题：{question}"),
 ])
